@@ -21,7 +21,7 @@ add_library(audio-lib STATIC ${audio-lib-src} ${audio-lib-modules})
 
 target_sources(audio-lib PUBLIC FILE_SET modules TYPE CXX_MODULES FILES ${audio-lib-modules})
 target_compile_features(audio-lib PUBLIC cxx_std_23)
-target_link_libraries(audio-lib PUBLIC core-lib glfw soloud)
+target_link_libraries(audio-lib PUBLIC core-lib soloud)
 target_include_directories(audio-lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 #add_subdirectory(tests)

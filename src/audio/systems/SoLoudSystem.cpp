@@ -1,5 +1,6 @@
 module;
 
+#include <thread>
 #include <utility>
 
 #include <entt/entt.hpp>
@@ -18,8 +19,7 @@ import Core.ResourceHandle;
 namespace Audio {
 
 	struct SoLoudAudioSource {
-		// BUG: Wav data seems to be used after shutdown, deleting causes crash.
-		SoLoud::Wav* wav{nullptr};
+		std::unique_ptr<SoLoud::Wav> wav;
 	};
 
 	SoLoudSystem::SoLoudSystem(Core::EnTTRegistry& registry, Core::Scheduler& scheduler) :
@@ -32,6 +32,15 @@ namespace Audio {
 	SoLoudSystem::~SoLoudSystem() {
 		mScheduler.unschedule(std::move(mTickHandle));
 		mSoloud.stopAll();
+
+		while (mSoloud.getActiveVoiceCount() > 0) {
+			std::this_thread::sleep_for(std::chrono::milliseconds(100));
+		}
+
+		entt::registry& registry(mRegistry);
+		auto audioSourceView = registry.view<SoLoudAudioSource>();
+		registry.destroy(audioSourceView.begin(), audioSourceView.end());
+
 		mSoloud.deinit();
 	}
 
@@ -40,7 +49,7 @@ namespace Audio {
 				entt::exclude<Core::FileLoadRequest, SoLoudAudioSource>);
 		createSoundResourceView.each([&registry](entt::entity entity, const Core::RawDataResource& rawData) {
 			auto& soLoudAudioSource{registry.emplace<SoLoudAudioSource>(entity)};
-			soLoudAudioSource.wav = new SoLoud::Wav();
+			soLoudAudioSource.wav = std::make_unique<SoLoud::Wav>();
 			soLoudAudioSource.wav->loadMem(rawData.rawData.data(), rawData.size, true, false);
 		});
 
