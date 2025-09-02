@@ -13,6 +13,7 @@ import Audio.PlaySoundSourceRequest;
 import Audio.SoundDescriptor;
 import Core.FileLoadRequest;
 import Core.RawDataResource;
+import Core.ResourceHandle;
 
 namespace Audio {
 
@@ -46,14 +47,24 @@ namespace Audio {
 
         auto playSoundSourceRequestView = registry.view<Audio::AudioSource, PlaySoundSourceRequest>();
         playSoundSourceRequestView.each([this, &registry](entt::entity entity, Audio::AudioSource& audioSource, const PlaySoundSourceRequest& request) {
-            if (!registry.all_of<SoLoudAudioSource>(audioSource.soundResource)) {
-                return;
-            }
+			if (audioSource.soundResource == entt::null) {
+				return;
+			}
 
-            auto& soLoudSource = registry.get<SoLoudAudioSource>(audioSource.soundResource);
+			if (!registry.all_of<Core::ResourceHandle>(audioSource.soundResource)) {
+				return;
+			}
 
-            auto handle = mSoloud.play(*soLoudSource.wav);
-            mSoloud.setLooping(handle, request.looping);
+			const auto& soundResourceHandle = registry.get<Core::ResourceHandle>(audioSource.soundResource);
+			if (soundResourceHandle.mResourceEntity == entt::null ||
+				!registry.all_of<SoLoudAudioSource>(soundResourceHandle.mResourceEntity)) {
+				return;
+			}
+
+			const auto& soLoudSource = registry.get<SoLoudAudioSource>(soundResourceHandle.mResourceEntity);
+
+			auto handle = mSoloud.play(*soLoudSource.wav);
+			mSoloud.setLooping(handle, request.looping);
 
             registry.erase<PlaySoundSourceRequest>(entity);
         });
