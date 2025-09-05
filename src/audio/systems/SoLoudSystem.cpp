@@ -72,7 +72,7 @@ namespace Audio {
 
 					auto& soLoudSource = registry.get<SoLoudAudioSource>(soundResourceHandle.mResourceEntity);
 
-					auto handle = mSoloud.play(*soLoudSource.wav);
+					auto handle = mSoloud.play(*soLoudSource.wav, request.volumeScale);
 					mSoloud.setLooping(handle, request.looping);
 
 					registry.erase<PlaySoundSourceRequest>(entity);
