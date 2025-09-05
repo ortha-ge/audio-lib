@@ -3,11 +3,9 @@ module Audio.Systems;
 
 namespace Audio {
 
-    AudioSystems::AudioSystems(Core::EnTTRegistry& registry, Core::Scheduler& scheduler)
-        : mSoLoudSystem(registry, scheduler){
-    }
+	AudioSystems::AudioSystems(Core::EnTTRegistry& registry, Core::Scheduler& scheduler)
+		: mSoLoudSystem(registry, scheduler) {}
 
-    AudioSystems::~AudioSystems() {
-    }
+	AudioSystems::~AudioSystems() = default;
 
-} // Audio
+} // namespace Audio

@@ -7,22 +7,19 @@ import Core.Scheduler;
 
 export namespace Audio {
 
-    class AudioSystems {
-    public:
+	class AudioSystems {
+	public:
+		AudioSystems(Core::EnTTRegistry&, Core::Scheduler&);
+		~AudioSystems();
 
-        AudioSystems(Core::EnTTRegistry&, Core::Scheduler&);
-        ~AudioSystems();
+		AudioSystems(AudioSystems&&) = delete;
+		AudioSystems& operator=(AudioSystems&&) noexcept = delete;
 
-        AudioSystems(AudioSystems&&) = delete;
-        AudioSystems& operator=(AudioSystems&&) noexcept = delete;
+		AudioSystems(const AudioSystems&) = delete;
+		AudioSystems& operator=(const AudioSystems&) = delete;
 
-        AudioSystems(const AudioSystems&) = delete;
-        AudioSystems& operator=(const AudioSystems&) = delete;
+	private:
+		SoLoudSystem mSoLoudSystem;
+	};
 
-    private:
-
-        SoLoudSystem mSoLoudSystem;
-
-    };
-
-} // Audio
+} // namespace Audio

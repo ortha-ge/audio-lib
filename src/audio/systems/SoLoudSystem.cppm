@@ -1,7 +1,7 @@
 module;
 
-#include <soloud.h>
 #include <entt/fwd.hpp>
+#include <soloud.h>
 
 export module Audio.SoLoudSystem;
 
@@ -10,21 +10,18 @@ import Core.Scheduler;
 
 export namespace Audio {
 
-    class SoLoudSystem {
-    public:
+	class SoLoudSystem {
+	public:
+		SoLoudSystem(Core::EnTTRegistry&, Core::Scheduler&);
+		~SoLoudSystem();
 
-        SoLoudSystem(Core::EnTTRegistry&, Core::Scheduler&);
-        ~SoLoudSystem();
+		void tick(entt::registry& registry);
 
-        void tick(entt::registry& registry);
+	private:
+		SoLoud::Soloud mSoloud;
+		Core::EnTTRegistry& mRegistry;
+		Core::Scheduler& mScheduler;
+		Core::TaskHandle mTickHandle{};
+	};
 
-    private:
-
-        SoLoud::Soloud mSoloud;
-        Core::EnTTRegistry& mRegistry;
-        Core::Scheduler& mScheduler;
-        Core::TaskHandle mTickHandle{};
-
-    };
-
-} // Audio
+} // namespace Audio
