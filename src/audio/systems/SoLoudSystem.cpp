@@ -65,15 +65,12 @@ namespace Audio {
 					return;
 				}
 
-				const auto& soundResourceHandle = registry.get<Core::ResourceHandle>(audioSource.soundResource);
-				if (soundResourceHandle.mResourceEntity == entt::null ||
-					!registry.all_of<SoLoudAudioSource>(soundResourceHandle.mResourceEntity)) {
+				const auto* soLoudAudioSource = Core::getResource<SoLoudAudioSource>(registry, audioSource.soundResource);
+				if (!soLoudAudioSource) {
 					return;
 				}
 
-				auto& soLoudSource = registry.get<SoLoudAudioSource>(soundResourceHandle.mResourceEntity);
-
-				auto handle = mSoloud.play(*soLoudSource.wav, request.volumeScale);
+				auto handle = mSoloud.play(*soLoudAudioSource->wav, request.volumeScale);
 				mSoloud.setLooping(handle, request.looping);
 
 				registry.erase<PlaySoundSourceRequest>(entity);
