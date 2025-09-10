@@ -15,6 +15,7 @@ import Audio.SoundDescriptor;
 import Core.FileLoadRequest;
 import Core.RawDataResource;
 import Core.ResourceHandle;
+import Core.ResourceHandleUtils;
 
 namespace Audio {
 
