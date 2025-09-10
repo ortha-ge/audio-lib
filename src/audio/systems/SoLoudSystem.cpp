@@ -57,11 +57,7 @@ namespace Audio {
 
 		registry.view<AudioSource, PlaySoundSourceRequest>().each(
 			[this, &registry](entt::entity entity, AudioSource& audioSource, const PlaySoundSourceRequest& request) {
-				if (audioSource.soundResource == entt::null) {
-					return;
-				}
-
-				if (!registry.all_of<Core::ResourceHandle>(audioSource.soundResource)) {
+				if (!audioSource.soundResource) {
 					return;
 				}
 
