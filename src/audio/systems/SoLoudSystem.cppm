@@ -18,6 +18,13 @@ export namespace Audio {
 		void tick(entt::registry& registry);
 
 	private:
+
+		void connectCallbacks(entt::registry& registry);
+		void disconnectCallbacks(entt::registry& registry);
+
+		void removeSoLoudSoundPlayback(entt::registry& registry, entt::entity entity);
+		void stopSoLoudSoundPlayback(entt::registry& registry, entt::entity entity);
+
 		SoLoud::Soloud mSoloud;
 		Core::EnTTRegistry& mRegistry;
 		Core::Scheduler& mScheduler;
