@@ -67,7 +67,7 @@ namespace Audio {
 		using namespace SoLoudSystemInternal;
 
 		registry
-			.view<const Core::RawDataResource, Audio::SoundDescriptor>(
+			.view<const Core::RawDataResource, SoundDescriptor>(
 				entt::exclude<Core::FileLoadRequest, SoLoudAudioSource>)
 			.each([&registry](entt::entity entity, const Core::RawDataResource& rawData) {
 				auto& soLoudAudioSource{ registry.emplace<SoLoudAudioSource>(entity) };
@@ -78,6 +78,7 @@ namespace Audio {
 		registry.view<AudioSource, PlaySoundSourceRequest>().each(
 			[this, &registry](entt::entity entity, AudioSource& audioSource, const PlaySoundSourceRequest& request) {
 				if (!audioSource.soundResource) {
+					registry.remove<PlaySoundSourceRequest>(entity);
 					return;
 				}
 
@@ -89,7 +90,7 @@ namespace Audio {
 				auto handle = mSoloud.play(*soLoudAudioSource->wav, request.volumeScale);
 				mSoloud.setLooping(handle, request.looping);
 
-				registry.erase<PlaySoundSourceRequest>(entity);
+				registry.remove<PlaySoundSourceRequest>(entity);
 				registry.emplace<SoLoudSoundPlayback>(entity, handle);
 				registry.emplace<SoundPlayback>(entity);
 			});

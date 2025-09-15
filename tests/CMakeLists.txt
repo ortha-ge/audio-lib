@@ -14,7 +14,7 @@ add_executable(audio-lib-tests ${audio-lib-tests-src})
 
 target_sources(audio-lib-tests PUBLIC FILE_SET modules TYPE CXX_MODULES FILES ${audio-lib-tests-modules})
 target_compile_features(audio-lib-tests PUBLIC cxx_std_23)
-target_link_libraries(audio-lib-tests PRIVATE core-lib Catch2::Catch2WithMain)
+target_link_libraries(audio-lib-tests PRIVATE core-lib audio-lib Catch2::Catch2WithMain)
 
 #add_custom_target(audio-lib-tests-assets
 #        COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different
