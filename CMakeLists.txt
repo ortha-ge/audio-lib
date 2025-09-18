@@ -4,6 +4,7 @@ cmake_minimum_required(VERSION 3.31)
 find_package(glfw3 CONFIG REQUIRED)
 
 set (audio-lib-src
+        src/audio/services/AudioSystemsService.cpp
         src/audio/systems/AudioSystems.cpp
         src/audio/systems/SoLoudSystem.cpp
 )
@@ -14,6 +15,7 @@ set (audio-lib-modules
         src/audio/SoundDescriptor.cppm
         src/audio/SoundPlayback.cppm
         src/audio/services/AudioSystemsService.cppm
+        src/audio/services/SoLoudSystemService.cppm
         src/audio/systems/AudioSystems.cppm
         src/audio/systems/SoLoudSystem.cppm
 )
