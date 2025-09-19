@@ -75,7 +75,17 @@ namespace Audio {
 				soLoudAudioSource.wav->loadMem(rawData.rawData.data(), rawData.size, true, false);
 			});
 
-		registry.view<AudioSource, PlaySoundSourceRequest>().each(
+		registry.view<PlaySoundSourceRequest, SoLoudSoundPlayback>()
+			.each([this, &registry](const entt::entity entity, const PlaySoundSourceRequest& request, SoLoudSoundPlayback& playback) {
+				if (request.stopExistingPlayback) {
+					mSoloud.stop(playback.mHandle);
+				}
+
+				registry.remove<SoLoudSoundPlayback>(entity);
+				registry.remove<SoundPlayback>(entity);
+			});
+
+		registry.view<AudioSource, PlaySoundSourceRequest>(entt::exclude<SoLoudSoundPlayback, SoundPlayback>).each(
 			[this, &registry](entt::entity entity, AudioSource& audioSource, const PlaySoundSourceRequest& request) {
 				if (!audioSource.soundResource) {
 					registry.remove<PlaySoundSourceRequest>(entity);
@@ -93,6 +103,16 @@ namespace Audio {
 				registry.remove<PlaySoundSourceRequest>(entity);
 				registry.emplace<SoLoudSoundPlayback>(entity, handle);
 				registry.emplace<SoundPlayback>(entity);
+			});
+
+		registry.view<SoLoudSoundPlayback>().each(
+			[this, &registry](const entt::entity entity, const SoLoudSoundPlayback& playback) {
+				if (mSoloud.isValidVoiceHandle(playback.mHandle)) {
+					return;
+				}
+
+				registry.remove<SoLoudSoundPlayback>(entity);
+				registry.remove<SoundPlayback>(entity);
 			});
 	}
 
