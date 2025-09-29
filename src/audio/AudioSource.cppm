@@ -1,6 +1,5 @@
 module;
 
-#include <entt/entity/entity.hpp>
 #include <memory>
 
 export module Audio.AudioSource;

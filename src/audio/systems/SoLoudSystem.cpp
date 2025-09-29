@@ -3,7 +3,6 @@ module;
 #include <thread>
 #include <utility>
 
-#include <entt/entt.hpp>
 #include <soloud.h>
 #include <soloud_wav.h>
 
@@ -17,6 +16,7 @@ import Core.FileLoadRequest;
 import Core.RawDataResource;
 import Core.ResourceHandle;
 import Core.ResourceHandleUtils;
+import entt;
 
 namespace Audio::SoLoudSystemInternal {
 
@@ -32,7 +32,7 @@ namespace Audio::SoLoudSystemInternal {
 
 namespace Audio {
 
-	SoLoudSystem::SoLoudSystem(Core::EnTTRegistry& registry, Core::Scheduler& scheduler)
+	SoLoudSystem::SoLoudSystem(entt::registry& registry, Core::Scheduler& scheduler)
 		: mRegistry{ registry }
 		, mScheduler{ scheduler } {
 

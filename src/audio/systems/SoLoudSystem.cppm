@@ -1,18 +1,17 @@
 module;
 
-#include <entt/fwd.hpp>
 #include <soloud.h>
 
 export module Audio.SoLoudSystem;
 
-import Core.EnTTRegistry;
 import Core.Scheduler;
+import entt;
 
 export namespace Audio {
 
 	class SoLoudSystem {
 	public:
-		SoLoudSystem(Core::EnTTRegistry&, Core::Scheduler&);
+		SoLoudSystem(entt::registry&, Core::Scheduler&);
 		~SoLoudSystem();
 
 		void tick(entt::registry& registry);
@@ -26,7 +25,7 @@ export namespace Audio {
 		void stopSoLoudSoundPlayback(entt::registry& registry, entt::entity entity);
 
 		SoLoud::Soloud mSoloud;
-		Core::EnTTRegistry& mRegistry;
+		entt::registry& mRegistry;
 		Core::Scheduler& mScheduler;
 		Core::TaskHandle mTickHandle{};
 	};

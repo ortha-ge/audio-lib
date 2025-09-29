@@ -1,14 +1,13 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include <entt/entt.hpp>
-
 import Audio.AudioSource;
 import Audio.PlaySoundSourceRequest;
 import Audio.SoLoudSystem;
 import Audio.SoundPlayback;
 import Core.EnTTRegistry;
 import Core.Scheduler;
+import entt;
 
 // TEST_CASE("AudioSourceWithEmptySoundAndPlaybackRequest_TickSoLoudSystem_NoPlaybackHandleAndRequestRemoved", "SoLoudSystem") {
 // 	using namespace Audio;
