@@ -9,6 +9,6 @@ import Ortha.Core.SchedulerService;
 
 export namespace Ortha::Audio {
 
-	struct SoLoudSystemService : kgr::single_service<SoLoudSystem, kgr::dependency<Ortha::Core::EnTTRegistryService, Ortha::Core::SchedulerService>>{};
+	struct SoLoudSystemService : kgr::single_service<SoLoudSystem, kgr::dependency<Core::EnTTRegistryService, Core::SchedulerService>>{};
 
 } // Audio

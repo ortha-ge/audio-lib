@@ -69,7 +69,7 @@ namespace Ortha::Audio {
 
 		registry
 			.view<const RawDataResource, SoundDescriptor>(
-				entt::exclude<Ortha::Core::FileLoadRequest, SoLoudAudioSource>)
+				entt::exclude<Core::FileLoadRequest, SoLoudAudioSource>)
 			.each([&registry](entt::entity entity, const RawDataResource& rawData) {
 				auto& soLoudAudioSource{ registry.emplace<SoLoudAudioSource>(entity) };
 				soLoudAudioSource.wav = std::make_unique<SoLoud::Wav>();
@@ -93,7 +93,7 @@ namespace Ortha::Audio {
 					return;
 				}
 
-				const auto* soLoudAudioSource = Ortha::Core::getResource<SoLoudAudioSource>(registry, audioSource.soundResource);
+				const auto* soLoudAudioSource = Core::getResource<SoLoudAudioSource>(registry, audioSource.soundResource);
 				if (!soLoudAudioSource) {
 					return;
 				}

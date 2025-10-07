@@ -10,8 +10,8 @@ import entt;
 
 // TEST_CASE("AudioSourceWithEmptySoundAndPlaybackRequest_TickSoLoudSystem_NoPlaybackHandleAndRequestRemoved", "SoLoudSystem") {
 // 	using namespace Ortha::Audio;
-// 	Ortha::Core::EnTTRegistry enttRegistry;
-// 	Ortha::Core::Scheduler scheduler;
+// 	Core::EnTTRegistry enttRegistry;
+// 	Core::Scheduler scheduler;
 // 	SoLoudSystem soLoudSystem(enttRegistry, scheduler);
 // 	entt::registry& registry(enttRegistry);
 // 	const entt::entity audioSourceEntity{ registry.create() };
