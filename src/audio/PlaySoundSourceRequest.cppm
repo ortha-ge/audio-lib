@@ -1,7 +1,7 @@
 
-export module Audio.PlaySoundSourceRequest;
+export module Ortha.Audio.PlaySoundSourceRequest;
 
-export namespace Audio {
+export namespace Ortha::Audio {
 
 	struct PlaySoundSourceRequest {
 		float volumeScale{ 1.0f };
@@ -9,4 +9,4 @@ export namespace Audio {
 		bool stopExistingPlayback{ false };
 	};
 
-} // namespace Audio
+} // namespace Ortha::Audio

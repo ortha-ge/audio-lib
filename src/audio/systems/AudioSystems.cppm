@@ -1,7 +1,7 @@
 
-export module Audio.Systems;
+export module Ortha.Audio.Systems;
 
-export namespace Audio {
+export namespace Ortha::Audio {
 
 	class AudioSystems {
 	public:
@@ -16,4 +16,4 @@ export namespace Audio {
 
 	};
 
-} // namespace Audio
+} // namespace Ortha::Audio

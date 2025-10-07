@@ -2,14 +2,14 @@ module;
 
 #include <memory>
 
-export module Audio.AudioSource;
+export module Ortha.Audio.AudioSource;
 
-import Core.ResourceHandle;
+import Ortha.Core.ResourceHandle;
 
-export namespace Audio {
+export namespace Ortha::Audio {
 
 	struct AudioSource {
 		std::shared_ptr<Core::ResourceHandle> soundResource{};
 	};
 
-} // namespace Audio
+} // namespace Ortha::Audio

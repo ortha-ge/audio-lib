@@ -1,9 +1,9 @@
-export module Audio.SoundPlayback;
+export module Ortha.Audio.SoundPlayback;
 
-export namespace Audio {
+export namespace Ortha::Audio {
 
 	struct SoundPlayback {
 		bool placeholder{ false };
 	};
 
-} // namespace Audio
+} // namespace Ortha::Audio

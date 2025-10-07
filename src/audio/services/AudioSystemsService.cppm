@@ -1,13 +1,13 @@
 
-export module Audio.SystemsService;
+export module Ortha.Audio.SystemsService;
 
-export import Audio.Systems;
+export import Ortha.Audio.Systems;
 
 import kangaru;
-import Core.EnTTRegistryService;
-import Core.SchedulerService;
+import Ortha.Core.EnTTRegistryService;
+import Ortha.Core.SchedulerService;
 
-export namespace Audio {
+export namespace Ortha::Audio {
 
 	void initAudioSubSystems(AudioSystems&, kgr::container&);
 

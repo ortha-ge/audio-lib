@@ -2,12 +2,12 @@ module;
 
 #include <soloud.h>
 
-export module Audio.SoLoudSystem;
+export module Ortha.Audio.SoLoudSystem;
 
-import Core.Scheduler;
+import Ortha.Core.Scheduler;
 import entt;
 
-export namespace Audio {
+export namespace Ortha::Audio {
 
 	class SoLoudSystem {
 	public:
@@ -30,4 +30,4 @@ export namespace Audio {
 		Core::TaskHandle mTickHandle{};
 	};
 
-} // namespace Audio
+} // namespace Ortha::Audio

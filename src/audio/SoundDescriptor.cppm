@@ -1,8 +1,8 @@
 
-export module Audio.SoundDescriptor;
+export module Ortha.Audio.SoundDescriptor;
 
-export namespace Audio {
+export namespace Ortha::Audio {
 
 	struct SoundDescriptor {};
 
-} // namespace Audio
+} // namespace Ortha::Audio

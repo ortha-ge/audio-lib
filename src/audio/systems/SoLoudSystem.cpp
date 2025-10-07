@@ -6,19 +6,19 @@ module;
 #include <soloud.h>
 #include <soloud_wav.h>
 
-module Audio.SoLoudSystem;
+module Ortha.Audio.SoLoudSystem;
 
-import Audio.AudioSource;
-import Audio.PlaySoundSourceRequest;
-import Audio.SoundDescriptor;
-import Audio.SoundPlayback;
-import Core.FileLoadRequest;
-import Core.RawDataResource;
-import Core.ResourceHandle;
-import Core.ResourceHandleUtils;
+import Ortha.Audio.AudioSource;
+import Ortha.Audio.PlaySoundSourceRequest;
+import Ortha.Audio.SoundDescriptor;
+import Ortha.Audio.SoundPlayback;
+import Ortha.Core.FileLoadRequest;
+import Ortha.Core.RawDataResource;
+import Ortha.Core.ResourceHandle;
+import Ortha.Core.ResourceHandleUtils;
 import entt;
 
-namespace Audio::SoLoudSystemInternal {
+namespace Ortha::Audio::SoLoudSystemInternal {
 
 	struct SoLoudAudioSource {
 		std::unique_ptr<SoLoud::Wav> wav;
@@ -28,9 +28,9 @@ namespace Audio::SoLoudSystemInternal {
 		SoLoud::handle mHandle;
 	};
 
-} // namespace Audio::SoLoudSystemInternal
+} // namespace Ortha::Audio::SoLoudSystemInternal
 
-namespace Audio {
+namespace Ortha::Audio {
 
 	SoLoudSystem::SoLoudSystem(entt::registry& registry, Core::Scheduler& scheduler)
 		: mRegistry{ registry }
@@ -64,12 +64,13 @@ namespace Audio {
 	}
 
 	void SoLoudSystem::tick(entt::registry& registry) {
+		using namespace Core;
 		using namespace SoLoudSystemInternal;
 
 		registry
-			.view<const Core::RawDataResource, SoundDescriptor>(
-				entt::exclude<Core::FileLoadRequest, SoLoudAudioSource>)
-			.each([&registry](entt::entity entity, const Core::RawDataResource& rawData) {
+			.view<const RawDataResource, SoundDescriptor>(
+				entt::exclude<Ortha::Core::FileLoadRequest, SoLoudAudioSource>)
+			.each([&registry](entt::entity entity, const RawDataResource& rawData) {
 				auto& soLoudAudioSource{ registry.emplace<SoLoudAudioSource>(entity) };
 				soLoudAudioSource.wav = std::make_unique<SoLoud::Wav>();
 				soLoudAudioSource.wav->loadMem(rawData.rawData.data(), rawData.size, true, false);
@@ -92,7 +93,7 @@ namespace Audio {
 					return;
 				}
 
-				const auto* soLoudAudioSource = Core::getResource<SoLoudAudioSource>(registry, audioSource.soundResource);
+				const auto* soLoudAudioSource = Ortha::Core::getResource<SoLoudAudioSource>(registry, audioSource.soundResource);
 				if (!soLoudAudioSource) {
 					return;
 				}
@@ -157,4 +158,4 @@ namespace Audio {
 		mSoloud.stop(soLoudPlayback.mHandle);
 	}
 
-} // namespace Audio
+} // namespace Ortha::Audio

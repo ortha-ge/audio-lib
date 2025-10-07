@@ -1,14 +1,14 @@
 
-export module Audio.SoLoudSystemService;
+export module Ortha.Audio.SoLoudSystemService;
 
-export import Audio.SoLoudSystem;
+export import Ortha.Audio.SoLoudSystem;
 
 import kangaru;
-import Core.EnTTRegistryService;
-import Core.SchedulerService;
+import Ortha.Core.EnTTRegistryService;
+import Ortha.Core.SchedulerService;
 
-export namespace Audio {
+export namespace Ortha::Audio {
 
-	struct SoLoudSystemService : kgr::single_service<SoLoudSystem, kgr::dependency<Core::EnTTRegistryService, Core::SchedulerService>>{};
+	struct SoLoudSystemService : kgr::single_service<SoLoudSystem, kgr::dependency<Ortha::Core::EnTTRegistryService, Ortha::Core::SchedulerService>>{};
 
 } // Audio
