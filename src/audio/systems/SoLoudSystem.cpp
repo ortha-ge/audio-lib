@@ -64,7 +64,7 @@ namespace Ortha::Audio {
 	}
 
 	void SoLoudSystem::tick(entt::registry& registry) {
-		using namespace Core;
+		using namespace Ortha::Core;
 		using namespace SoLoudSystemInternal;
 
 		registry

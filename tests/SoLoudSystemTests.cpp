@@ -9,7 +9,7 @@ import Ortha.Core.Scheduler;
 import entt;
 
 // TEST_CASE("AudioSourceWithEmptySoundAndPlaybackRequest_TickSoLoudSystem_NoPlaybackHandleAndRequestRemoved", "SoLoudSystem") {
-// 	using namespace Ortha::Audio;
+// 	using namespace Audio;
 // 	Core::EnTTRegistry enttRegistry;
 // 	Core::Scheduler scheduler;
 // 	SoLoudSystem soLoudSystem(enttRegistry, scheduler);
